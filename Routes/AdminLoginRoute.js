@@ -33,11 +33,18 @@ router.post('/admin-login', async (req, res) => {
         );
 
         // Send the token in cookies
+        // res.cookie('admin-token', token, {
+        //     httpOnly: true, // Allow client-side access (not as secure)
+        //     secure: process.env.NODE_ENV === 'production',
+        //     sameSite: 'lax',
+        //     maxAge: 60 * 60 * 1000
+        // });
         res.cookie('admin-token', token, {
-            httpOnly: true, // Allow client-side access (not as secure)
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 1000
+            httpOnly: true,        // Ensure the cookie can't be accessed via JavaScript
+            secure: true,          // Set to true in production (requires HTTPS)
+            sameSite: 'None',
+            path: '/',
+            maxAge: 3600000,       // Set expiration to 1 hour
         });
 
         // Send response indicating successful login

@@ -38,11 +38,18 @@ router.post('/hotel-login', async (req, res) => {
         );
 
         // Set the token in a cookie
+        // res.cookie('hotel-token', token, {
+        //     httpOnly: true, // Allow client-side access (not as secure)
+        //     secure: process.env.NODE_ENV === 'production',
+        //     sameSite: 'lax',
+        //     maxAge: 60 * 60 * 1000
+        // });
         res.cookie('hotel-token', token, {
-            httpOnly: true, // Allow client-side access (not as secure)
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 1000
+            httpOnly: true,        // Ensure the cookie can't be accessed via JavaScript
+            secure: true,          // Set to true in production (requires HTTPS)
+            sameSite: 'None',
+            path: '/',
+            maxAge: 3600000,       // Set expiration to 1 hour
         });
 
 

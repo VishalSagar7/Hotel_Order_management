@@ -33,11 +33,19 @@ router.post('/room-login', async (req, res) => {
             { expiresIn: '1h' });
 
         // Send the token as a cookie
+        // res.cookie('room-token', token, {
+        //     httpOnly: true, // Allow client-side access (not as secure)
+        //     secure: process.env.NODE_ENV === 'production',
+        //     sameSite: 'lax',
+        //     maxAge: 60 * 60 * 1000
+        // });
+
         res.cookie('room-token', token, {
-            httpOnly: true, // Allow client-side access (not as secure)
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 1000
+            httpOnly: true,        // Ensure the cookie can't be accessed via JavaScript
+            secure: true,          // Set to true in production (requires HTTPS)
+            sameSite: 'None',
+            path: '/',
+            maxAge: 3600000,       // Set expiration to 1 hour
         });
 
         return res.status(200).json({ success:true ,message: 'Login successful', room});
