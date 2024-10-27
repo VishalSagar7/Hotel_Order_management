@@ -1,10 +1,16 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'
+
+
+dotenv.config();
+
+const uri = process.env.DB_URI
 
 // Function to connect to MongoDB
 export const connectDB = async () => {
     try {
         await mongoose.connect(
-            'mongodb+srv://vishalaynile1234:YC68sdR46IvyB4OH@hotelcluster.76kkf.mongodb.net/?retryWrites=true&w=majority&appName=HotelCluster',
+            uri,
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
