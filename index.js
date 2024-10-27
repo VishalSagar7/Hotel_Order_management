@@ -24,7 +24,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ['http://localhost:5173'],      // handelling cors error
+    origin: ['http://localhost:5173', 'https://hotel-order-management.onrender.com'],      // handelling cors error
     credentials: true,
 }));
 
