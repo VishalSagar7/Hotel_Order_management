@@ -13,9 +13,12 @@ import adminTokenVerification from './middlewares/adminTokenVerification.js';
 import roomTokenVerification from './middlewares/roomTokenVerification.js';
 import AddnewDishRoute from './Routes/AddNewDish.js';
 import getAllFoodItemsRoute from './Routes/GetAllFoodsRoute.js'
+import dotenv from 'dotenv'
 
 
-const port = 3000;
+
+dotenv.config();
+const port = process.env.port || 3001;
 const app = express();
 
 app.use(express.json());
